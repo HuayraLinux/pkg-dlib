@@ -1,0 +1,48 @@
+Source: dlib
+Priority: optional
+Maintainer: Séverin Lemaignan <severin@guakamole.org>
+Uploaders: Hugo Lefeuvre <hle@debian.org>
+Build-Depends: bzip2,
+               cmake,
+               debhelper (>= 10),
+               libblas-dev,
+               libjpeg-dev,
+               liblapack-dev,
+               libpng-dev,
+               libsqlite3-dev
+Standards-Version: 4.1.4
+Section: libs
+Homepage: http://dlib.net/
+Vcs-Browser: https://salsa.debian.org/hle/dlib
+Vcs-Git: https://salsa.debian.org/hle/dlib.git
+
+Package: libdlib-dev
+Section: libdevel
+Multi-Arch: same
+Architecture: any
+Depends: libdlib19 (= ${binary:Version}),
+         ${misc:Depends}
+Description: C++ toolkit for machine learning and computer vision - development
+ Dlib is a general purpose cross-platform open source software library written
+ in the C++ programming language. It now contains software components for
+ dealing with networking, threads, graphical interfaces, complex data
+ structures, linear algebra, statistical machine learning, image processing,
+ data mining, XML and text parsing, numerical optimization, Bayesian networks,
+ and numerous other tasks.
+ .
+ This package contains the development headers.
+
+Package: libdlib19
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Description: C++ toolkit for machine learning and computer vision - library
+ Dlib is a general purpose cross-platform open source software library written
+ in the C++ programming language. It now contains software components for
+ dealing with networking, threads, graphical interfaces, complex data
+ structures, linear algebra, statistical machine learning, image processing,
+ data mining, XML and text parsing, numerical optimization, Bayesian networks,
+ and numerous other tasks.
+

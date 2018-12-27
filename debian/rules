@@ -1,0 +1,49 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+# Since upstream commit 61f747d, upstream build system only builds
+# either static link files or shared libraries at the same time,
+# but not both. In order to generate all needed files for proper
+# Debian packaging we have therefore to build two times, with
+# different BUILD_SHARED_LIBS.
+#
+# See https://github.com/davisking/dlib/issues/923 for more info
+
+CONFIG_SHARED_PATH  = config_shared
+CONFIG_STATIC_PATH  = config_static
+LIB_SOVERSION       = 19
+EXAMPLES_PATH       = debian/libdlib$(LIB_SOVERSION)/usr/share/doc/libdlib$(LIB_SOVERSION)/examples/
+
+%:
+	dh $@ --buildsystem=cmake
+
+override_dh_auto_configure:
+	dh_auto_configure -B$(CONFIG_SHARED_PATH) -- -DDLIB_NO_GUI_SUPPORT=ON -DBUILD_SHARED_LIBS=ON
+	dh_auto_configure -B$(CONFIG_STATIC_PATH) -- -DDLIB_NO_GUI_SUPPORT=ON -DBUILD_SHARED_LIBS=OFF
+	# Generate debian/*.links files at build time to ensure multiarch compatibility
+	sed 's/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g' \
+                debian/libdlib$(LIB_SOVERSION).links.in > debian/libdlib$(LIB_SOVERSION).links
+
+override_dh_auto_build:
+	dh_auto_build -B$(CONFIG_STATIC_PATH)
+	dh_auto_build -B$(CONFIG_SHARED_PATH)
+
+override_dh_auto_test:
+	dh_auto_test -B$(CONFIG_STATIC_PATH)
+	dh_auto_test -B$(CONFIG_SHARED_PATH)
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf $(CONFIG_SHARED_PATH) $(CONFIG_STATIC_PATH)
+
+override_dh_auto_install:
+	dh_auto_install -B$(CONFIG_STATIC_PATH)
+	dh_auto_install -B$(CONFIG_SHARED_PATH)
+	# Remove empty directories
+	find $(CURDIR)/debian/tmp/usr/include/dlib -type d -empty -delete
+
+override_dh_fixperms:
+	dh_fixperms
+	# Fix wrong permissions in examples/
+	chmod 644 $(EXAMPLES_PATH)/max_cost_assignment_ex.cpp

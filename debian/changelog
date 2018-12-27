@@ -1,0 +1,54 @@
+dlib (19.16-1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * New upstream version
+
+ -- Fernando Toledo <ragnarok@docksud.com.ar>  Thu, 27 Dec 2018 15:07:39 -0300
+
+dlib (19.10-2) unstable; urgency=medium
+
+  * Add missing debian/copyright entries (Closes: #895701).
+  * Bump Standards-Version to 4.1.4.
+
+ -- Hugo Lefeuvre <hle@debian.org>  Sat, 14 Apr 2018 23:15:38 -0400
+
+dlib (19.10-1) unstable; urgency=medium
+
+  * New upstream release (Closes: #894118).
+    - Update debian/docs to match new upstream paths.
+    - Rewrite and cleanup debian/rules to match new upstream build system
+      decisions.
+    - Update binary package name accordingly.
+  * New co-maintainer (Hugo Lefeuvre).
+    - Add Uploaders entry for Hugo Lefeuvre.
+    - Add debian/copyright entry for Hugo Lefeuvre.
+  * Add Multi-Arch support (Closes: #894617):
+    - Add required Multi-Arch fields in debian/control.
+    - Update debian/*.install files to match new paths.
+    - Add missing Pre-Depends field.
+  * Fix soft links: Generate links files at build time, add required
+    debian/*.links.in files.
+  * Remove useless debian/*.dirs files.
+  * Build with hardening flags.
+  * Migrate repository to Salsa: update Vcs-* fields in debian/control.
+  * Bump compat to 11 and update debhelper dependency accordingly.
+  * Bump Standards-Version to 4.1.3.
+  * Bump copyright years.
+  * Update links to use HTTPS protocol.
+  * Run wrap-and-sort -a.
+
+ -- Hugo Lefeuvre <hle@debian.org>  Fri, 30 Mar 2018 21:23:27 -0400
+
+dlib (18.18-2) unstable; urgency=medium
+
+  * Add the static library to the dev package. Closes: #836676.
+  * Add Multi-Arch:foreign to libdlib-data control. Closes: #847990.
+  * Standards-Version: updated to 3.9.8
+
+ -- Séverin Lemaignan <severin@guakamole.org>  Mon, 12 Dec 2016 22:03:37 +0000
+
+dlib (18.18-1) unstable; urgency=low
+
+  * Initial release. (Closes: #800531)
+
+ -- Séverin Lemaignan <severin@guakamole.org>  Thu, 14 Jan 2016 09:54:28 +0000

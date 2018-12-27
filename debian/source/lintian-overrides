@@ -1,0 +1,2 @@
+# upstream does not provide gpg signature
+debian-watch-does-not-check-gpg-signature

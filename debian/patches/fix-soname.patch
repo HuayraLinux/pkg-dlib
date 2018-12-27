@@ -1,0 +1,26 @@
+From: Séverin Lemaignan <severin@guakamole.org>
+Reviewed-by: Hugo Lefeuvre <hle@debian.org>
+Subject: Fix library SONAME
+ Set library SOVERSION to the library's major version number.
+ While this is not considered as a good practice by many
+ library packagers, dlib's upstream uses the default cmake
+ behavior when SOVERSION is not specified, that is the full
+ version number is considered being the SOVERSION, which is
+ even worse. Using only the major version number as
+ SOVERSION is therefore a good tradeoff between using a
+ completely different Debian specific SOVERSION (we'd rather
+ like to avoid that), and using upstream's one.
+Bug-Debian: http://bugs.debian.org/894508
+Last-Update: 2018-04-14
+--- a/dlib/CMakeLists.txt	2018-04-14 10:21:53.318790237 -0400
++++ b/dlib/CMakeLists.txt	2018-04-14 10:22:56.270263140 -0400
+@@ -774,7 +774,8 @@
+    # Install the library
+    if (NOT DLIB_IN_PROJECT_BUILD)
+       set_target_properties(dlib PROPERTIES
+-         VERSION ${VERSION})
++         VERSION ${VERSION}
++         SOVERSION ${CPACK_PACKAGE_VERSION_MAJOR})
+       install(TARGETS dlib
+          EXPORT dlib 
+          RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} # Windows considers .dll to be runtime artifacts
