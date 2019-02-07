@@ -19,8 +19,8 @@ EXAMPLES_PATH       = debian/libdlib$(LIB_SOVERSION)/usr/share/doc/libdlib$(LIB_
 	dh $@ --buildsystem=cmake
 
 override_dh_auto_configure:
-	dh_auto_configure -B$(CONFIG_SHARED_PATH) -- -DDLIB_NO_GUI_SUPPORT=ON -DBUILD_SHARED_LIBS=ON
-	dh_auto_configure -B$(CONFIG_STATIC_PATH) -- -DDLIB_NO_GUI_SUPPORT=ON -DBUILD_SHARED_LIBS=OFF
+	dh_auto_configure -B$(CONFIG_SHARED_PATH) -- -DBUILD_SHARED_LIBS=ON
+	dh_auto_configure -B$(CONFIG_STATIC_PATH) -- -DBUILD_SHARED_LIBS=OFF
 	# Generate debian/*.links files at build time to ensure multiarch compatibility
 	sed 's/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g' \
                 debian/libdlib$(LIB_SOVERSION).links.in > debian/libdlib$(LIB_SOVERSION).links

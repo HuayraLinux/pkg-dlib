@@ -5,11 +5,12 @@ Uploaders: Hugo Lefeuvre <hle@debian.org>
 Build-Depends: bzip2,
                cmake,
                debhelper (>= 10),
-               libblas-dev,
+               libopenblas-dev,
                libjpeg-dev,
                liblapack-dev,
                libpng-dev,
-               libsqlite3-dev
+               libsqlite3-dev,
+               libx11-dev
 Standards-Version: 4.1.4
 Section: libs
 Homepage: http://dlib.net/
@@ -45,4 +46,3 @@ Description: C++ toolkit for machine learning and computer vision - library
  structures, linear algebra, statistical machine learning, image processing,
  data mining, XML and text parsing, numerical optimization, Bayesian networks,
  and numerous other tasks.
-

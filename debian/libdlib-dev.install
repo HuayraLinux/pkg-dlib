@@ -2,3 +2,4 @@ usr/include/*
 usr/lib/*/cmake/*
 usr/lib/*/lib*.a
 usr/lib/*/lib*.so
+usr/lib/x86_64-linux-gnu/pkgconfig/*.pc
