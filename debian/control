@@ -4,7 +4,7 @@ Maintainer: Séverin Lemaignan <severin@guakamole.org>
 Uploaders: Hugo Lefeuvre <hle@debian.org>
 Build-Depends: bzip2,
                cmake,
-               debhelper (>= 10),
+               debhelper (>= 9),
                libopenblas-dev,
                libjpeg-dev,
                liblapack-dev,
